@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotelRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,8 +41,6 @@
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextAboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextReferenceBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextHotelRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,8 +49,14 @@
             this.contextDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
+            this.contextExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextAboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.aboutProgramToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sql_QueriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextSQL_QueriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.mainContextMenuStrip.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
@@ -80,22 +82,6 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.fileToolStripMenuItem.Text = "Файл";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.exitToolStripMenuItem.Text = "Выход";
-            // 
-            // aboutProgramToolStripMenuItem
-            // 
-            this.aboutProgramToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutProgramToolStripMenuItem.Image")));
-            this.aboutProgramToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
-            this.aboutProgramToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
-            this.aboutProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.aboutProgramToolStripMenuItem.Text = "О программе";
             // 
             // referenceBookToolStripMenuItem
             // 
@@ -135,7 +121,8 @@
             // documentToolStripMenuItem
             // 
             this.documentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reportToolStripMenuItem});
+            this.reportToolStripMenuItem,
+            this.sql_QueriesToolStripMenuItem});
             this.documentToolStripMenuItem.Name = "documentToolStripMenuItem";
             this.documentToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.documentToolStripMenuItem.Text = "Документы";
@@ -143,7 +130,7 @@
             // reportToolStripMenuItem
             // 
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reportToolStripMenuItem.Text = "Отчеты";
             // 
             // mainContextMenuStrip
@@ -163,22 +150,6 @@
             this.contextFileToolStripMenuItem.Name = "contextFileToolStripMenuItem";
             this.contextFileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.contextFileToolStripMenuItem.Text = "Файл";
-            // 
-            // contextExitToolStripMenuItem
-            // 
-            this.contextExitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("contextExitToolStripMenuItem.Image")));
-            this.contextExitToolStripMenuItem.Name = "contextExitToolStripMenuItem";
-            this.contextExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.contextExitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.contextExitToolStripMenuItem.Text = "Выход";
-            // 
-            // contextAboutProgramToolStripMenuItem
-            // 
-            this.contextAboutProgramToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("contextAboutProgramToolStripMenuItem.Image")));
-            this.contextAboutProgramToolStripMenuItem.Name = "contextAboutProgramToolStripMenuItem";
-            this.contextAboutProgramToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
-            this.contextAboutProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.contextAboutProgramToolStripMenuItem.Text = "О программе";
             // 
             // contextReferenceBookToolStripMenuItem
             // 
@@ -218,7 +189,8 @@
             // contextDocumentToolStripMenuItem
             // 
             this.contextDocumentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextReportToolStripMenuItem});
+            this.contextReportToolStripMenuItem,
+            this.contextSQL_QueriesToolStripMenuItem});
             this.contextDocumentToolStripMenuItem.Name = "contextDocumentToolStripMenuItem";
             this.contextDocumentToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.contextDocumentToolStripMenuItem.Text = "Документы";
@@ -226,7 +198,7 @@
             // contextReportToolStripMenuItem
             // 
             this.contextReportToolStripMenuItem.Name = "contextReportToolStripMenuItem";
-            this.contextReportToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.contextReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.contextReportToolStripMenuItem.Text = "Отчеты";
             // 
             // mainToolStrip
@@ -239,6 +211,22 @@
             this.mainToolStrip.Size = new System.Drawing.Size(423, 25);
             this.mainToolStrip.TabIndex = 1;
             this.mainToolStrip.Text = "toolStrip1";
+            // 
+            // contextExitToolStripMenuItem
+            // 
+            this.contextExitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("contextExitToolStripMenuItem.Image")));
+            this.contextExitToolStripMenuItem.Name = "contextExitToolStripMenuItem";
+            this.contextExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.contextExitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.contextExitToolStripMenuItem.Text = "Выход";
+            // 
+            // contextAboutProgramToolStripMenuItem
+            // 
+            this.contextAboutProgramToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("contextAboutProgramToolStripMenuItem.Image")));
+            this.contextAboutProgramToolStripMenuItem.Name = "contextAboutProgramToolStripMenuItem";
+            this.contextAboutProgramToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
+            this.contextAboutProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.contextAboutProgramToolStripMenuItem.Text = "О программе";
             // 
             // exitToolStripButton
             // 
@@ -258,6 +246,34 @@
             this.aboutProgramToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.aboutProgramToolStripButton.Text = "toolStripButton2";
             this.aboutProgramToolStripButton.ToolTipText = "О программе";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.exitToolStripMenuItem.Text = "Выход";
+            // 
+            // aboutProgramToolStripMenuItem
+            // 
+            this.aboutProgramToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutProgramToolStripMenuItem.Image")));
+            this.aboutProgramToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
+            this.aboutProgramToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
+            this.aboutProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.aboutProgramToolStripMenuItem.Text = "О программе";
+            // 
+            // sql_QueriesToolStripMenuItem
+            // 
+            this.sql_QueriesToolStripMenuItem.Name = "sql_QueriesToolStripMenuItem";
+            this.sql_QueriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sql_QueriesToolStripMenuItem.Text = "SQL-запросы";
+            // 
+            // contextSQL_QueriesToolStripMenuItem
+            // 
+            this.contextSQL_QueriesToolStripMenuItem.Name = "contextSQL_QueriesToolStripMenuItem";
+            this.contextSQL_QueriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contextSQL_QueriesToolStripMenuItem.Text = "SQL-запросы";
             // 
             // MainForm
             // 
@@ -309,6 +325,8 @@
         private System.Windows.Forms.ToolStrip mainToolStrip;
         private System.Windows.Forms.ToolStripButton exitToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutProgramToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem sql_QueriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contextSQL_QueriesToolStripMenuItem;
     }
 }
 

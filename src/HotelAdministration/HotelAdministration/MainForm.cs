@@ -34,6 +34,8 @@ namespace HotelAdministration
             contextScheduleToolStripMenuItem.Click += ShowSchedule;
             reportToolStripMenuItem.Click += ShowReport;
             contextReportToolStripMenuItem.Click += ShowReport;
+            sql_QueriesToolStripMenuItem.Click += ShowFormSQL;
+            contextSQL_QueriesToolStripMenuItem.Click += ShowFormSQL;
         }
 
         private void MainForm_Closing(object sender, FormClosingEventArgs e)
@@ -79,6 +81,11 @@ namespace HotelAdministration
         private void ShowReport(object sender, EventArgs e)
         {
             ShowForm(ReportForm.Instance);
+        }
+
+        private void ShowFormSQL(object sender, EventArgs e)
+        {
+            ShowForm(FormSQL.Instance);
         }
 
         private void ShowForm(Form form)
