@@ -1828,6 +1828,7 @@ namespace HotelAdministration {
                 this.columnQuarter.AllowDBNull = false;
                 this.columnQuarter.MaxLength = 1;
                 this.columnBusyDays.AllowDBNull = false;
+                this.columnBusyDays.DefaultValue = ((short)(0));
                 this.columnHotelRoomInfo.ReadOnly = true;
             }
             

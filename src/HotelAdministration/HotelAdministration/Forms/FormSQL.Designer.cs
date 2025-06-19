@@ -51,6 +51,14 @@
             this.arrivalDateCheckBox = new System.Windows.Forms.CheckBox();
             this.clientSurnameTextBox = new System.Windows.Forms.TextBox();
             this.clientSurnameLabel = new System.Windows.Forms.Label();
+            this.subqueryTabPage = new System.Windows.Forms.TabPage();
+            this.subqueryGroupBox = new System.Windows.Forms.GroupBox();
+            this.correlatedRadioButton = new System.Windows.Forms.RadioButton();
+            this.noCorrelatedRadioButton = new System.Windows.Forms.RadioButton();
+            this.countOfPlacesLabel = new System.Windows.Forms.Label();
+            this.countOfPlacesTextBox = new System.Windows.Forms.TextBox();
+            this.subqueryButton = new System.Windows.Forms.Button();
+            this.subqueryDataGridView = new System.Windows.Forms.DataGridView();
             this.sqlTabControl.SuspendLayout();
             this.primerTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectDataGridView)).BeginInit();
@@ -59,12 +67,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.fSelectDataGridView)).BeginInit();
             this.fSelectGroupBox.SuspendLayout();
             this.detGroupBox.SuspendLayout();
+            this.subqueryTabPage.SuspendLayout();
+            this.subqueryGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.subqueryDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // sqlTabControl
             // 
             this.sqlTabControl.Controls.Add(this.primerTabPage);
             this.sqlTabControl.Controls.Add(this.selectTabPage);
+            this.sqlTabControl.Controls.Add(this.subqueryTabPage);
             this.sqlTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sqlTabControl.Location = new System.Drawing.Point(0, 0);
             this.sqlTabControl.Name = "sqlTabControl";
@@ -301,6 +313,89 @@
             this.clientSurnameLabel.TabIndex = 0;
             this.clientSurnameLabel.Text = "Фамилия клиента";
             // 
+            // subqueryTabPage
+            // 
+            this.subqueryTabPage.Controls.Add(this.subqueryDataGridView);
+            this.subqueryTabPage.Controls.Add(this.subqueryGroupBox);
+            this.subqueryTabPage.Location = new System.Drawing.Point(4, 22);
+            this.subqueryTabPage.Name = "subqueryTabPage";
+            this.subqueryTabPage.Size = new System.Drawing.Size(749, 382);
+            this.subqueryTabPage.TabIndex = 2;
+            this.subqueryTabPage.Text = "Примеры подзопросов";
+            this.subqueryTabPage.UseVisualStyleBackColor = true;
+            // 
+            // subqueryGroupBox
+            // 
+            this.subqueryGroupBox.Controls.Add(this.subqueryButton);
+            this.subqueryGroupBox.Controls.Add(this.countOfPlacesTextBox);
+            this.subqueryGroupBox.Controls.Add(this.countOfPlacesLabel);
+            this.subqueryGroupBox.Controls.Add(this.noCorrelatedRadioButton);
+            this.subqueryGroupBox.Controls.Add(this.correlatedRadioButton);
+            this.subqueryGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.subqueryGroupBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.subqueryGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.subqueryGroupBox.Name = "subqueryGroupBox";
+            this.subqueryGroupBox.Size = new System.Drawing.Size(749, 193);
+            this.subqueryGroupBox.TabIndex = 0;
+            this.subqueryGroupBox.TabStop = false;
+            this.subqueryGroupBox.Text = "Подзапросы по данным";
+            // 
+            // correlatedRadioButton
+            // 
+            this.correlatedRadioButton.AutoSize = true;
+            this.correlatedRadioButton.Location = new System.Drawing.Point(27, 43);
+            this.correlatedRadioButton.Name = "correlatedRadioButton";
+            this.correlatedRadioButton.Size = new System.Drawing.Size(118, 17);
+            this.correlatedRadioButton.TabIndex = 0;
+            this.correlatedRadioButton.TabStop = true;
+            this.correlatedRadioButton.Text = "Коррелированный";
+            this.correlatedRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // noCorrelatedRadioButton
+            // 
+            this.noCorrelatedRadioButton.AutoSize = true;
+            this.noCorrelatedRadioButton.Location = new System.Drawing.Point(246, 43);
+            this.noCorrelatedRadioButton.Name = "noCorrelatedRadioButton";
+            this.noCorrelatedRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.noCorrelatedRadioButton.TabIndex = 1;
+            this.noCorrelatedRadioButton.TabStop = true;
+            this.noCorrelatedRadioButton.Text = "Некоррелированный";
+            this.noCorrelatedRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // countOfPlacesLabel
+            // 
+            this.countOfPlacesLabel.AutoSize = true;
+            this.countOfPlacesLabel.Location = new System.Drawing.Point(24, 104);
+            this.countOfPlacesLabel.Name = "countOfPlacesLabel";
+            this.countOfPlacesLabel.Size = new System.Drawing.Size(149, 13);
+            this.countOfPlacesLabel.TabIndex = 2;
+            this.countOfPlacesLabel.Text = "Количество мест в номерах";
+            // 
+            // countOfPlacesTextBox
+            // 
+            this.countOfPlacesTextBox.Location = new System.Drawing.Point(193, 101);
+            this.countOfPlacesTextBox.Name = "countOfPlacesTextBox";
+            this.countOfPlacesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.countOfPlacesTextBox.TabIndex = 3;
+            // 
+            // subqueryButton
+            // 
+            this.subqueryButton.Location = new System.Drawing.Point(177, 153);
+            this.subqueryButton.Name = "subqueryButton";
+            this.subqueryButton.Size = new System.Drawing.Size(154, 23);
+            this.subqueryButton.TabIndex = 4;
+            this.subqueryButton.Text = "Выполнить подзапрос";
+            this.subqueryButton.UseVisualStyleBackColor = true;
+            // 
+            // subqueryDataGridView
+            // 
+            this.subqueryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.subqueryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.subqueryDataGridView.Location = new System.Drawing.Point(0, 193);
+            this.subqueryDataGridView.Name = "subqueryDataGridView";
+            this.subqueryDataGridView.Size = new System.Drawing.Size(749, 189);
+            this.subqueryDataGridView.TabIndex = 1;
+            // 
             // FormSQL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +415,10 @@
             this.fSelectGroupBox.PerformLayout();
             this.detGroupBox.ResumeLayout(false);
             this.detGroupBox.PerformLayout();
+            this.subqueryTabPage.ResumeLayout(false);
+            this.subqueryGroupBox.ResumeLayout(false);
+            this.subqueryGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.subqueryDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -348,5 +447,13 @@
         private System.Windows.Forms.RadioButton addCityRadioButton;
         private System.Windows.Forms.RadioButton addCostRadioButton;
         private System.Windows.Forms.Button fSelectButton;
+        private System.Windows.Forms.TabPage subqueryTabPage;
+        private System.Windows.Forms.GroupBox subqueryGroupBox;
+        private System.Windows.Forms.RadioButton noCorrelatedRadioButton;
+        private System.Windows.Forms.RadioButton correlatedRadioButton;
+        private System.Windows.Forms.Button subqueryButton;
+        private System.Windows.Forms.TextBox countOfPlacesTextBox;
+        private System.Windows.Forms.Label countOfPlacesLabel;
+        private System.Windows.Forms.DataGridView subqueryDataGridView;
     }
 }

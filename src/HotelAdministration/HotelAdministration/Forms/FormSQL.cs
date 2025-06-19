@@ -33,6 +33,7 @@ namespace HotelAdministration.Forms
             scheduleRadioButton.CheckedChanged += ScheduleRadioButton_CheckedChanged;
             reportRadioButton.CheckedChanged += ReportRadioButton_CheckedChanged;
             fSelectButton.Click += FSelectButton_Click;
+            subqueryButton.Click += SubqueryButton_Click;
         }
 
         private void HotelRoomRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -146,6 +147,56 @@ namespace HotelAdministration.Forms
             DataTable table = new DataTable();
             adapter.Fill(table);
             fSelectDataGridView.DataSource = table;
+            if (table.Rows.Count == 0) MessageBox.Show("Нет значений!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void SubqueryButton_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(countOfPlacesTextBox.Text))
+            {
+                MessageBox.Show("Обязательно укажите количество мест", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string sqlSelect = "";
+            if(correlatedRadioButton.Checked)
+            {
+                sqlSelect = @"SELECT 
+                              HotelRoom.RoomNumber, 
+                              HotelRoom.PhoneNumber, 
+                              HotelRoom.Cost, 
+                              HotelRoom.CountOfPlaces, 
+                              (SELECT BusyDays FROM HotelRoom_Report WHERE Quarter = 1 AND RoomNumber = HotelRoom.RoomNumber) AS BusyDays
+                              FROM HotelRoom
+                              WHERE CountOfPlaces = @countOfPlaces";
+            }
+            else if(noCorrelatedRadioButton.Checked)
+            {
+                sqlSelect = @"SELECT *
+                              FROM HotelRoom
+                              WHERE Cost > (SELECT AVG(Cost) FROM HotelRoom) AND CountOfPlaces = @countOfPlaces";
+            }
+            else
+            {
+                MessageBox.Show("Не выбрали вид подзапроса", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = sqlSelect;
+            try
+            {
+                command.Parameters.AddWithValue("@countOfPlaces", Convert.ToInt16(countOfPlacesTextBox.Text));
+            }
+            catch
+            {
+                MessageBox.Show("Номер продажи в условии должен быть задан числом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = command;
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            subqueryDataGridView.DataSource = table;
             if (table.Rows.Count == 0) MessageBox.Show("Нет значений!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
