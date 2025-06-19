@@ -30,67 +30,43 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
-            this.hotelAdministrationDataSet = new HotelAdministration.HotelAdministrationDataSet();
-            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.clientTableAdapter = new HotelAdministration.HotelAdministrationDataSetTableAdapters.ClientTableAdapter();
-            this.tableAdapterManager = new HotelAdministration.HotelAdministrationDataSetTableAdapters.TableAdapterManager();
             this.clientBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.clientBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.findToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.findToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.findToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.clientDataGridView = new System.Windows.Forms.DataGridView();
+            this.filterCheckBox = new System.Windows.Forms.CheckBox();
+            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hotelAdministrationDataSet = new HotelAdministration.HotelAdministrationDataSet();
+            this.clientTableAdapter = new HotelAdministration.HotelAdministrationDataSetTableAdapters.ClientTableAdapter();
+            this.tableAdapterManager = new HotelAdministration.HotelAdministrationDataSetTableAdapters.TableAdapterManager();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hotelRoomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.findToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.findToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.findToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.filterCheckBox = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.hotelAdministrationDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingNavigator)).BeginInit();
             this.clientBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelAdministrationDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // hotelAdministrationDataSet
-            // 
-            this.hotelAdministrationDataSet.DataSetName = "HotelAdministrationDataSet";
-            this.hotelAdministrationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // clientBindingSource
-            // 
-            this.clientBindingSource.DataMember = "Client";
-            this.clientBindingSource.DataSource = this.hotelAdministrationDataSet;
-            // 
-            // clientTableAdapter
-            // 
-            this.clientTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.ClientTableAdapter = this.clientTableAdapter;
-            this.tableAdapterManager.EmployeeTableAdapter = null;
-            this.tableAdapterManager.HotelRoom_ReportTableAdapter = null;
-            this.tableAdapterManager.HotelRoomTableAdapter = null;
-            this.tableAdapterManager.ReportTableAdapter = null;
-            this.tableAdapterManager.ScheduleTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = HotelAdministration.HotelAdministrationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // clientBindingNavigator
             // 
@@ -122,9 +98,34 @@
             this.clientBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.clientBindingNavigator.Name = "clientBindingNavigator";
             this.clientBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.clientBindingNavigator.Size = new System.Drawing.Size(862, 25);
+            this.clientBindingNavigator.Size = new System.Drawing.Size(962, 25);
             this.clientBindingNavigator.TabIndex = 0;
             this.clientBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Добавить";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(36, 22);
+            this.bindingNavigatorCountItem.Text = "из {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -159,16 +160,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Текущее положение";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(36, 22);
-            this.bindingNavigatorCountItem.Text = "из {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -191,26 +185,8 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Добавить";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // clientBindingNavigatorSaveItem
             // 
@@ -221,8 +197,28 @@
             this.clientBindingNavigatorSaveItem.Text = "Сохранить данные";
             this.clientBindingNavigatorSaveItem.Click += new System.EventHandler(this.clientBindingNavigatorSaveItem_Click);
             // 
+            // findToolStripSeparator
+            // 
+            this.findToolStripSeparator.Name = "findToolStripSeparator";
+            this.findToolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // findToolStripTextBox
+            // 
+            this.findToolStripTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.findToolStripTextBox.Name = "findToolStripTextBox";
+            this.findToolStripTextBox.Size = new System.Drawing.Size(100, 25);
+            // 
+            // findToolStripButton
+            // 
+            this.findToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("findToolStripButton.Image")));
+            this.findToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.findToolStripButton.Name = "findToolStripButton";
+            this.findToolStripButton.Size = new System.Drawing.Size(62, 22);
+            this.findToolStripButton.Text = "Поиск";
+            // 
             // clientDataGridView
             // 
+            this.clientDataGridView.AllowUserToAddRows = false;
             this.clientDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -233,15 +229,51 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
+            this.FIO,
+            this.hotelRoomDataGridViewTextBoxColumn,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
             this.clientDataGridView.DataSource = this.clientBindingSource;
             this.clientDataGridView.Location = new System.Drawing.Point(12, 28);
             this.clientDataGridView.Name = "clientDataGridView";
-            this.clientDataGridView.Size = new System.Drawing.Size(843, 359);
+            this.clientDataGridView.Size = new System.Drawing.Size(943, 359);
             this.clientDataGridView.TabIndex = 1;
+            // 
+            // filterCheckBox
+            // 
+            this.filterCheckBox.AutoSize = true;
+            this.filterCheckBox.Location = new System.Drawing.Point(448, 5);
+            this.filterCheckBox.Name = "filterCheckBox";
+            this.filterCheckBox.Size = new System.Drawing.Size(66, 17);
+            this.filterCheckBox.TabIndex = 3;
+            this.filterCheckBox.Text = "Фильтр";
+            this.filterCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // clientBindingSource
+            // 
+            this.clientBindingSource.DataMember = "Client";
+            this.clientBindingSource.DataSource = this.hotelAdministrationDataSet;
+            // 
+            // hotelAdministrationDataSet
+            // 
+            this.hotelAdministrationDataSet.DataSetName = "HotelAdministrationDataSet";
+            this.hotelAdministrationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // clientTableAdapter
+            // 
+            this.clientTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.ClientTableAdapter = this.clientTableAdapter;
+            this.tableAdapterManager.EmployeeTableAdapter = null;
+            this.tableAdapterManager.HotelRoom_ReportTableAdapter = null;
+            this.tableAdapterManager.HotelRoomTableAdapter = null;
+            this.tableAdapterManager.ReportTableAdapter = null;
+            this.tableAdapterManager.ScheduleTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = HotelAdministration.HotelAdministrationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -267,11 +299,18 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "Patronymic";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // dataGridViewTextBoxColumn5
+            // FIO
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "HotelRoom";
-            this.dataGridViewTextBoxColumn5.HeaderText = "HotelRoom";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.FIO.DataPropertyName = "FIO";
+            this.FIO.HeaderText = "FIO";
+            this.FIO.Name = "FIO";
+            this.FIO.ReadOnly = true;
+            // 
+            // hotelRoomDataGridViewTextBoxColumn
+            // 
+            this.hotelRoomDataGridViewTextBoxColumn.DataPropertyName = "HotelRoom";
+            this.hotelRoomDataGridViewTextBoxColumn.HeaderText = "HotelRoom";
+            this.hotelRoomDataGridViewTextBoxColumn.Name = "hotelRoomDataGridViewTextBoxColumn";
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -291,52 +330,23 @@
             this.dataGridViewTextBoxColumn8.HeaderText = "DepartureDate";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
-            // findToolStripSeparator
-            // 
-            this.findToolStripSeparator.Name = "findToolStripSeparator";
-            this.findToolStripSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // findToolStripTextBox
-            // 
-            this.findToolStripTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.findToolStripTextBox.Name = "findToolStripTextBox";
-            this.findToolStripTextBox.Size = new System.Drawing.Size(100, 25);
-            // 
-            // findToolStripButton
-            // 
-            this.findToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("findToolStripButton.Image")));
-            this.findToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.findToolStripButton.Name = "findToolStripButton";
-            this.findToolStripButton.Size = new System.Drawing.Size(62, 22);
-            this.findToolStripButton.Text = "Поиск";
-            // 
-            // filterCheckBox
-            // 
-            this.filterCheckBox.AutoSize = true;
-            this.filterCheckBox.Location = new System.Drawing.Point(448, 5);
-            this.filterCheckBox.Name = "filterCheckBox";
-            this.filterCheckBox.Size = new System.Drawing.Size(66, 17);
-            this.filterCheckBox.TabIndex = 3;
-            this.filterCheckBox.Text = "Фильтр";
-            this.filterCheckBox.UseVisualStyleBackColor = true;
-            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 395);
+            this.ClientSize = new System.Drawing.Size(962, 395);
             this.Controls.Add(this.filterCheckBox);
             this.Controls.Add(this.clientDataGridView);
             this.Controls.Add(this.clientBindingNavigator);
             this.Name = "ClientForm";
             this.Text = "Клиенты";
             this.Load += new System.EventHandler(this.ClientForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.hotelAdministrationDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingNavigator)).EndInit();
             this.clientBindingNavigator.ResumeLayout(false);
             this.clientBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelAdministrationDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,17 +372,18 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton clientBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView clientDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.ToolStripSeparator findToolStripSeparator;
         private System.Windows.Forms.ToolStripTextBox findToolStripTextBox;
         private System.Windows.Forms.ToolStripButton findToolStripButton;
         private System.Windows.Forms.CheckBox filterCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FIO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hotelRoomDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }

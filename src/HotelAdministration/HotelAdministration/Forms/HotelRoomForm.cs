@@ -12,6 +12,8 @@ namespace HotelAdministration.Forms
 {
     public partial class HotelRoomForm : Form
     {
+        int currentRoomNumber = -1;
+
         private static HotelRoomForm _instance;
 
         public static HotelRoomForm Instance
@@ -26,14 +28,10 @@ namespace HotelAdministration.Forms
         public HotelRoomForm()
         {
             InitializeComponent();
-            hotelRoomDataGridView.DataError += hotelRoomsDataGridView_DataError;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += findCheckBox_CheckedChanged;
-        }
-
-        private void hotelRoomsDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            toolStripButtonOK.Click += ToolStripButtonOK_Click;
+            Shown += HotelRoom_Shown;
         }
 
         private void hotelRoomBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -102,6 +100,16 @@ namespace HotelAdministration.Forms
             }
         }
 
+        private void ToolStripButtonOK_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void HotelRoom_Shown(object sender, EventArgs e)
+        {
+            hotelRoomBindingSource.Position = hotelRoomBindingSource.Find("RoomNumber", currentRoomNumber);
+        }
+
         private void HotelRoomForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "hotelAdministrationDataSet.HotelRoom". При необходимости она может быть перемещена или удалена.
@@ -112,6 +120,19 @@ namespace HotelAdministration.Forms
         private string GetSelectedFieldName()
         {
             return hotelRoomDataGridView.Columns[hotelRoomDataGridView.CurrentCell.ColumnIndex].DataPropertyName;
+        }
+
+        public int ShowSelectForm(int roomNumber)
+        {
+            toolStripButtonOK.Visible = true;
+            currentRoomNumber = roomNumber;
+            bool dialogResult = ShowDialog() == DialogResult.OK;
+            toolStripButtonOK.Visible = false;
+            hotelRoomBindingSource.Position = 0;
+            if (dialogResult)
+                return Convert.ToInt16(((DataRowView)hotelRoomBindingSource.Current)["RoomNumber"]);
+            else
+                return -1;
         }
     }
 }

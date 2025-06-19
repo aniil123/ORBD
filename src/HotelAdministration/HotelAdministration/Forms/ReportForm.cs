@@ -26,17 +26,10 @@ namespace HotelAdministration.Forms
         public ReportForm()
         {
             InitializeComponent();
-            reportDataGridView.DataError += reportDataGridView_DataError;
-            hotelRoom_ReportDataGridView.DataError += reportDataGridView_DataError;
             reportBindingNavigatorSaveItem.Click += reportBindingNavigatorSaveItem_Click;
             hotelRoom_ReportBindingNavigatorSaveItem.Click += hotelRoom_ReportBindingNavigatorSaveItem_Click;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += filterCheckBox_CheckedChanged;
-        }
-
-        private void reportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void reportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -121,6 +114,8 @@ namespace HotelAdministration.Forms
 
         private void ReportForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "hotelAdministrationDataSet.HotelRoom". При необходимости она может быть перемещена или удалена.
+            this.hotelRoomTableAdapter.Fill(this.hotelAdministrationDataSet.HotelRoom);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "hotelAdministrationDataSet.HotelRoom_Report". При необходимости она может быть перемещена или удалена.
             this.hotelRoom_ReportTableAdapter.Fill(this.hotelAdministrationDataSet.HotelRoom_Report);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "hotelAdministrationDataSet.Report". При необходимости она может быть перемещена или удалена.

@@ -26,14 +26,8 @@ namespace HotelAdministration.Forms
         public ScheduleForm()
         {
             InitializeComponent();
-            scheduleDataGridView.DataError += scheduleDataGridView_DataError;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += filterCheckBox_CheckedChanged;
-        }
-
-        private void scheduleDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void scheduleBindingNavigatorSaveItem_Click(object sender, EventArgs e)

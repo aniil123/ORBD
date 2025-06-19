@@ -26,14 +26,9 @@ namespace HotelAdministration.Forms
         public ClientForm()
         {
             InitializeComponent();
-            clientDataGridView.DataError += clientsDataGridView_DataError;
+            clientDataGridView.CellClick += ClientDataGridView_Click;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += findCheckBox_CheckedChanged;
-        }
-
-        private void clientsDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void clientBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -99,6 +94,26 @@ namespace HotelAdministration.Forms
                 MessageBox.Show("Значений нет");
                 clientBindingSource.Filter = "";
                 filterCheckBox.Checked = false;
+            }
+        }
+
+        private void ClientDataGridView_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewColumn currentColumn = clientDataGridView.Columns[clientDataGridView.CurrentCell.ColumnIndex];
+            if (currentColumn.DataPropertyName == "HotelRoom" && e.RowIndex != -1)
+            {
+                int roomNumber = -1;
+                string currentCellValue = ((DataRowView)clientBindingSource.Current)["HotelRoom"].ToString();
+                if (currentCellValue != "")
+                {
+                    roomNumber = Convert.ToInt16(currentCellValue);
+                }
+                roomNumber = HotelRoomForm.Instance.ShowSelectForm(roomNumber);
+                if (roomNumber >= 0)
+                {
+                    ((DataRowView)clientBindingSource.Current)["HotelRoom"] = roomNumber;
+                }
+                clientDataGridView.EndEdit();
             }
         }
 

@@ -57,6 +57,7 @@ namespace HotelAdministration {
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
+            this.InitExpressions();
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -68,6 +69,9 @@ namespace HotelAdministration {
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
                 this.Relations.CollectionChanged += schemaChangedHandler1;
+                if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.ExcludeSchema)) {
+                    this.InitExpressions();
+                }
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
@@ -103,6 +107,7 @@ namespace HotelAdministration {
             }
             else {
                 this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                this.InitExpressions();
             }
             this.GetSerializationData(info, context);
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -214,6 +219,7 @@ namespace HotelAdministration {
         public override global::System.Data.DataSet Clone() {
             HotelAdministrationDataSet cln = ((HotelAdministrationDataSet)(base.Clone()));
             cln.InitVars();
+            cln.InitExpressions();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
@@ -339,13 +345,13 @@ namespace HotelAdministration {
             this.Namespace = "http://tempuri.org/HotelAdministrationDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableClient = new ClientDataTable();
+            this.tableClient = new ClientDataTable(false);
             base.Tables.Add(this.tableClient);
             this.tableEmployee = new EmployeeDataTable();
             base.Tables.Add(this.tableEmployee);
-            this.tableHotelRoom = new HotelRoomDataTable();
+            this.tableHotelRoom = new HotelRoomDataTable(false);
             base.Tables.Add(this.tableHotelRoom);
-            this.tableHotelRoom_Report = new HotelRoom_ReportDataTable();
+            this.tableHotelRoom_Report = new HotelRoom_ReportDataTable(false);
             base.Tables.Add(this.tableHotelRoom_Report);
             this.tableReport = new ReportDataTable();
             base.Tables.Add(this.tableReport);
@@ -464,6 +470,14 @@ namespace HotelAdministration {
             return type;
         }
         
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitExpressions() {
+            this.Client.FIOColumn.Expression = "Name+Surname+Patronymic";
+            this.HotelRoom.InfoColumn.Expression = "\'тел. \'+PhoneNumber+\', \'+Cost+\'₽, \'+CountOfPlaces+\'мест\'";
+            this.HotelRoom_Report.HotelRoomInfoColumn.Expression = "Parent(FK_HotelRoom_Report_HotelRoom).Info";
+        }
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void ClientRowChangeEventHandler(object sender, ClientRowChangeEvent e);
         
@@ -505,12 +519,23 @@ namespace HotelAdministration {
             
             private global::System.Data.DataColumn columnDepartureDate;
             
+            private global::System.Data.DataColumn columnFIO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ClientDataTable() {
+            public ClientDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ClientDataTable(bool initExpressions) {
                 this.TableName = "Client";
                 this.BeginInit();
                 this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
                 this.EndInit();
             }
             
@@ -604,6 +629,14 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn FIOColumn {
+                get {
+                    return this.columnFIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -639,6 +672,28 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ClientRow AddClientRow(string PassportData, string Name, string Surname, string Patronymic, HotelRoomRow parentHotelRoomRowByFK_Client_HotelRoom, string CityFromWhichCame, System.DateTime ArrivalDate, System.DateTime DepartureDate, string FIO) {
+                ClientRow rowClientRow = ((ClientRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        PassportData,
+                        Name,
+                        Surname,
+                        Patronymic,
+                        null,
+                        CityFromWhichCame,
+                        ArrivalDate,
+                        DepartureDate,
+                        FIO};
+                if ((parentHotelRoomRowByFK_Client_HotelRoom != null)) {
+                    columnValuesArray[4] = parentHotelRoomRowByFK_Client_HotelRoom[0];
+                }
+                rowClientRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowClientRow);
+                return rowClientRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public ClientRow AddClientRow(string PassportData, string Name, string Surname, string Patronymic, HotelRoomRow parentHotelRoomRowByFK_Client_HotelRoom, string CityFromWhichCame, System.DateTime ArrivalDate, System.DateTime DepartureDate) {
                 ClientRow rowClientRow = ((ClientRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -649,7 +704,8 @@ namespace HotelAdministration {
                         null,
                         CityFromWhichCame,
                         ArrivalDate,
-                        DepartureDate};
+                        DepartureDate,
+                        null};
                 if ((parentHotelRoomRowByFK_Client_HotelRoom != null)) {
                     columnValuesArray[4] = parentHotelRoomRowByFK_Client_HotelRoom[0];
                 }
@@ -690,6 +746,7 @@ namespace HotelAdministration {
                 this.columnCityFromWhichCame = base.Columns["CityFromWhichCame"];
                 this.columnArrivalDate = base.Columns["ArrivalDate"];
                 this.columnDepartureDate = base.Columns["DepartureDate"];
+                this.columnFIO = base.Columns["FIO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -711,6 +768,8 @@ namespace HotelAdministration {
                 base.Columns.Add(this.columnArrivalDate);
                 this.columnDepartureDate = new global::System.Data.DataColumn("DepartureDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDepartureDate);
+                this.columnFIO = new global::System.Data.DataColumn("FIO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFIO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPassportData}, true));
                 this.columnPassportData.AllowDBNull = false;
@@ -727,6 +786,7 @@ namespace HotelAdministration {
                 this.columnCityFromWhichCame.MaxLength = 20;
                 this.columnArrivalDate.AllowDBNull = false;
                 this.columnDepartureDate.AllowDBNull = false;
+                this.columnFIO.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -745,6 +805,12 @@ namespace HotelAdministration {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(ClientRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitExpressions() {
+                this.FIOColumn.Expression = "Name+Surname+Patronymic";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1194,12 +1260,23 @@ namespace HotelAdministration {
             
             private global::System.Data.DataColumn columnBusy;
             
+            private global::System.Data.DataColumn columnInfo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public HotelRoomDataTable() {
+            public HotelRoomDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HotelRoomDataTable(bool initExpressions) {
                 this.TableName = "HotelRoom";
                 this.BeginInit();
                 this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
                 this.EndInit();
             }
             
@@ -1269,6 +1346,14 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn InfoColumn {
+                get {
+                    return this.columnInfo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1304,6 +1389,22 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HotelRoomRow AddHotelRoomRow(string PhoneNumber, short Cost, string CountOfPlaces, bool Busy, string Info) {
+                HotelRoomRow rowHotelRoomRow = ((HotelRoomRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        PhoneNumber,
+                        Cost,
+                        CountOfPlaces,
+                        Busy,
+                        Info};
+                rowHotelRoomRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowHotelRoomRow);
+                return rowHotelRoomRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public HotelRoomRow AddHotelRoomRow(string PhoneNumber, short Cost, string CountOfPlaces, bool Busy) {
                 HotelRoomRow rowHotelRoomRow = ((HotelRoomRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1311,7 +1412,8 @@ namespace HotelAdministration {
                         PhoneNumber,
                         Cost,
                         CountOfPlaces,
-                        Busy};
+                        Busy,
+                        null};
                 rowHotelRoomRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHotelRoomRow);
                 return rowHotelRoomRow;
@@ -1346,6 +1448,7 @@ namespace HotelAdministration {
                 this.columnCost = base.Columns["Cost"];
                 this.columnCountOfPlaces = base.Columns["CountOfPlaces"];
                 this.columnBusy = base.Columns["Busy"];
+                this.columnInfo = base.Columns["Info"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1361,6 +1464,8 @@ namespace HotelAdministration {
                 base.Columns.Add(this.columnCountOfPlaces);
                 this.columnBusy = new global::System.Data.DataColumn("Busy", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBusy);
+                this.columnInfo = new global::System.Data.DataColumn("Info", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInfo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnRoomNumber}, true));
                 this.columnRoomNumber.AutoIncrement = true;
@@ -1377,6 +1482,7 @@ namespace HotelAdministration {
                 this.columnCountOfPlaces.MaxLength = 1;
                 this.columnBusy.AllowDBNull = false;
                 this.columnBusy.DefaultValue = ((bool)(false));
+                this.columnInfo.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1395,6 +1501,12 @@ namespace HotelAdministration {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(HotelRoomRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitExpressions() {
+                this.InfoColumn.Expression = "\'тел. \'+PhoneNumber+\', \'+Cost+\'₽, \'+CountOfPlaces+\'мест\'";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1516,12 +1628,23 @@ namespace HotelAdministration {
             
             private global::System.Data.DataColumn columnBusyDays;
             
+            private global::System.Data.DataColumn columnHotelRoomInfo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public HotelRoom_ReportDataTable() {
+            public HotelRoom_ReportDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HotelRoom_ReportDataTable(bool initExpressions) {
                 this.TableName = "HotelRoom_Report";
                 this.BeginInit();
                 this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
                 this.EndInit();
             }
             
@@ -1575,6 +1698,14 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn HotelRoomInfoColumn {
+                get {
+                    return this.columnHotelRoomInfo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1610,12 +1741,33 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HotelRoom_ReportRow AddHotelRoom_ReportRow(HotelRoomRow parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom, ReportRow parentReportRowByFK_HotelRoom_Report_Report, short BusyDays, string HotelRoomInfo) {
+                HotelRoom_ReportRow rowHotelRoom_ReportRow = ((HotelRoom_ReportRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        BusyDays,
+                        HotelRoomInfo};
+                if ((parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom != null)) {
+                    columnValuesArray[0] = parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom[0];
+                }
+                if ((parentReportRowByFK_HotelRoom_Report_Report != null)) {
+                    columnValuesArray[1] = parentReportRowByFK_HotelRoom_Report_Report[0];
+                }
+                rowHotelRoom_ReportRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowHotelRoom_ReportRow);
+                return rowHotelRoom_ReportRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public HotelRoom_ReportRow AddHotelRoom_ReportRow(HotelRoomRow parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom, ReportRow parentReportRowByFK_HotelRoom_Report_Report, short BusyDays) {
                 HotelRoom_ReportRow rowHotelRoom_ReportRow = ((HotelRoom_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        BusyDays};
+                        BusyDays,
+                        null};
                 if ((parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom != null)) {
                     columnValuesArray[0] = parentHotelRoomRowByFK_HotelRoom_Report_HotelRoom[0];
                 }
@@ -1655,6 +1807,7 @@ namespace HotelAdministration {
                 this.columnRoomNumber = base.Columns["RoomNumber"];
                 this.columnQuarter = base.Columns["Quarter"];
                 this.columnBusyDays = base.Columns["BusyDays"];
+                this.columnHotelRoomInfo = base.Columns["HotelRoomInfo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1666,6 +1819,8 @@ namespace HotelAdministration {
                 base.Columns.Add(this.columnQuarter);
                 this.columnBusyDays = new global::System.Data.DataColumn("BusyDays", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBusyDays);
+                this.columnHotelRoomInfo = new global::System.Data.DataColumn("HotelRoomInfo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHotelRoomInfo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnRoomNumber,
                                 this.columnQuarter}, true));
@@ -1673,6 +1828,7 @@ namespace HotelAdministration {
                 this.columnQuarter.AllowDBNull = false;
                 this.columnQuarter.MaxLength = 1;
                 this.columnBusyDays.AllowDBNull = false;
+                this.columnHotelRoomInfo.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1691,6 +1847,12 @@ namespace HotelAdministration {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(HotelRoom_ReportRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitExpressions() {
+                this.HotelRoomInfoColumn.Expression = "Parent(FK_HotelRoom_Report_HotelRoom).Info";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2520,6 +2682,22 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string FIO {
+                get {
+                    try {
+                        return ((string)(this[this.tableClient.FIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'FIO\' в таблице \'Client\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableClient.FIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public HotelRoomRow HotelRoomRow {
                 get {
                     return ((HotelRoomRow)(this.GetParentRow(this.Table.ParentRelations["FK_Client_HotelRoom"])));
@@ -2527,6 +2705,18 @@ namespace HotelAdministration {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Client_HotelRoom"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFIONull() {
+                return this.IsNull(this.tableClient.FIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFIONull() {
+                this[this.tableClient.FIOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2682,6 +2872,34 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Info {
+                get {
+                    try {
+                        return ((string)(this[this.tableHotelRoom.InfoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Info\' в таблице \'HotelRoom\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHotelRoom.InfoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsInfoNull() {
+                return this.IsNull(this.tableHotelRoom.InfoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetInfoNull() {
+                this[this.tableHotelRoom.InfoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public ClientRow[] GetClientRows() {
                 if ((this.Table.ChildRelations["FK_Client_HotelRoom"] == null)) {
                     return new ClientRow[0];
@@ -2763,6 +2981,22 @@ namespace HotelAdministration {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string HotelRoomInfo {
+                get {
+                    try {
+                        return ((string)(this[this.tableHotelRoom_Report.HotelRoomInfoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'HotelRoomInfo\' в таблице \'HotelRoom_Report\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHotelRoom_Report.HotelRoomInfoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public HotelRoomRow HotelRoomRow {
                 get {
                     return ((HotelRoomRow)(this.GetParentRow(this.Table.ParentRelations["FK_HotelRoom_Report_HotelRoom"])));
@@ -2781,6 +3015,18 @@ namespace HotelAdministration {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_HotelRoom_Report_Report"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsHotelRoomInfoNull() {
+                return this.IsNull(this.tableHotelRoom_Report.HotelRoomInfoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetHotelRoomInfoNull() {
+                this[this.tableHotelRoom_Report.HotelRoomInfoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3335,7 +3581,7 @@ SELECT PassportData, Name, Surname, Patronymic, HotelRoom, CityFromWhichCame, Ar
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT PassportData, Name, Surname, Patronymic, HotelRoom, CityFromWhichCame, Arr" +
-                "ivalDate, DepartureDate FROM dbo.Client";
+                "ivalDate, DepartureDate FROM Client";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3358,7 +3604,7 @@ SELECT PassportData, Name, Surname, Patronymic, HotelRoom, CityFromWhichCame, Ar
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual HotelAdministrationDataSet.ClientDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            HotelAdministrationDataSet.ClientDataTable dataTable = new HotelAdministrationDataSet.ClientDataTable();
+            HotelAdministrationDataSet.ClientDataTable dataTable = new HotelAdministrationDataSet.ClientDataTable(true);
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -4199,7 +4445,7 @@ SELECT RoomNumber, PhoneNumber, Cost, CountOfPlaces, Busy FROM HotelRoom WHERE (
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual HotelAdministrationDataSet.HotelRoomDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            HotelAdministrationDataSet.HotelRoomDataTable dataTable = new HotelAdministrationDataSet.HotelRoomDataTable();
+            HotelAdministrationDataSet.HotelRoomDataTable dataTable = new HotelAdministrationDataSet.HotelRoomDataTable(true);
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -4556,7 +4802,7 @@ SELECT RoomNumber, Quarter, BusyDays FROM HotelRoom_Report WHERE (Quarter = @Qua
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual HotelAdministrationDataSet.HotelRoom_ReportDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            HotelAdministrationDataSet.HotelRoom_ReportDataTable dataTable = new HotelAdministrationDataSet.HotelRoom_ReportDataTable();
+            HotelAdministrationDataSet.HotelRoom_ReportDataTable dataTable = new HotelAdministrationDataSet.HotelRoom_ReportDataTable(true);
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

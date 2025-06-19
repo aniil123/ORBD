@@ -26,17 +26,10 @@ namespace HotelAdministration.Forms
         public EmployeeForm()
         {
             InitializeComponent();
-            employeeDataGridView.DataError += employeeDataGridView_DataError;
-            scheduleDataGridView.DataError += employeeDataGridView_DataError;
             employeeBindingNavigatorSaveItem.Click += employeeBindingNavigatorSaveItem_Click;
             scheduleBindingNavigatorSaveItem.Click += scheduleBindingNavigatorSaveItem_Click;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += filterCheckBox_CheckedChanged;
-        }
-
-        private void employeeDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void employeeBindingNavigatorSaveItem_Click(object sender, EventArgs e)
