@@ -58,6 +58,10 @@
             this.filterCheckBox = new System.Windows.Forms.CheckBox();
             this.hotelRoom_ReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hotelRoom_ReportDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HotelRoomInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotelRoom_ReportBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -73,10 +77,6 @@
             this.hotelRoom_ReportBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.hotelRoomBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hotelRoomTableAdapter = new HotelAdministration.HotelAdministrationDataSetTableAdapters.HotelRoomTableAdapter();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HotelRoomInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.hotelAdministrationDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportBindingNavigator)).BeginInit();
@@ -148,7 +148,7 @@
             this.reportBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.reportBindingNavigator.Name = "reportBindingNavigator";
             this.reportBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.reportBindingNavigator.Size = new System.Drawing.Size(682, 25);
+            this.reportBindingNavigator.Size = new System.Drawing.Size(572, 25);
             this.reportBindingNavigator.TabIndex = 0;
             this.reportBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -279,7 +279,7 @@
             this.reportDataGridView.DataSource = this.reportBindingSource;
             this.reportDataGridView.Location = new System.Drawing.Point(12, 28);
             this.reportDataGridView.Name = "reportDataGridView";
-            this.reportDataGridView.Size = new System.Drawing.Size(655, 217);
+            this.reportDataGridView.Size = new System.Drawing.Size(545, 217);
             this.reportDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -336,8 +336,41 @@
             this.hotelRoom_ReportDataGridView.DataSource = this.hotelRoom_ReportBindingSource;
             this.hotelRoom_ReportDataGridView.Location = new System.Drawing.Point(12, 276);
             this.hotelRoom_ReportDataGridView.Name = "hotelRoom_ReportDataGridView";
-            this.hotelRoom_ReportDataGridView.Size = new System.Drawing.Size(655, 249);
+            this.hotelRoom_ReportDataGridView.Size = new System.Drawing.Size(545, 249);
             this.hotelRoom_ReportDataGridView.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Quarter";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Quarter";
+            this.dataGridViewTextBoxColumn5.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "RoomNumber";
+            this.dataGridViewTextBoxColumn4.HeaderText = "RoomNumber";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // HotelRoomInfo
+            // 
+            this.HotelRoomInfo.DataPropertyName = "HotelRoomInfo";
+            this.HotelRoomInfo.HeaderText = "HotelRoomInfo";
+            this.HotelRoomInfo.Name = "HotelRoomInfo";
+            this.HotelRoomInfo.ReadOnly = true;
+            this.HotelRoomInfo.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "BusyDays";
+            this.dataGridViewTextBoxColumn6.HeaderText = "BusyDays";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // hotelRoom_ReportBindingNavigator
             // 
@@ -474,44 +507,11 @@
             // 
             this.hotelRoomTableAdapter.ClearBeforeFill = true;
             // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Quarter";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Quarter";
-            this.dataGridViewTextBoxColumn5.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "RoomNumber";
-            this.dataGridViewTextBoxColumn4.HeaderText = "RoomNumber";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // HotelRoomInfo
-            // 
-            this.HotelRoomInfo.DataPropertyName = "HotelRoomInfo";
-            this.HotelRoomInfo.HeaderText = "HotelRoomInfo";
-            this.HotelRoomInfo.Name = "HotelRoomInfo";
-            this.HotelRoomInfo.ReadOnly = true;
-            this.HotelRoomInfo.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "BusyDays";
-            this.dataGridViewTextBoxColumn6.HeaderText = "BusyDays";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 559);
+            this.ClientSize = new System.Drawing.Size(572, 559);
             this.Controls.Add(this.hotelRoom_ReportBindingNavigator);
             this.Controls.Add(this.hotelRoom_ReportDataGridView);
             this.Controls.Add(this.filterCheckBox);
@@ -580,11 +580,11 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.BindingSource hotelRoomBindingSource;
-        private HotelAdministrationDataSetTableAdapters.HotelRoomTableAdapter hotelRoomTableAdapter;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn HotelRoomInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.BindingSource hotelRoomBindingSource;
+        private HotelAdministrationDataSetTableAdapters.HotelRoomTableAdapter hotelRoomTableAdapter;
     }
 }
