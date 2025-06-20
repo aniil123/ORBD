@@ -47,18 +47,43 @@
             this.addCityRadioButton = new System.Windows.Forms.RadioButton();
             this.addCostRadioButton = new System.Windows.Forms.RadioButton();
             this.ascArrivalDateCheckBox = new System.Windows.Forms.CheckBox();
-            this.arrivalDateTextBox = new System.Windows.Forms.TextBox();
+            this.moreArrivalDateTextBox = new System.Windows.Forms.TextBox();
             this.arrivalDateCheckBox = new System.Windows.Forms.CheckBox();
             this.clientSurnameTextBox = new System.Windows.Forms.TextBox();
             this.clientSurnameLabel = new System.Windows.Forms.Label();
             this.subqueryTabPage = new System.Windows.Forms.TabPage();
-            this.subqueryGroupBox = new System.Windows.Forms.GroupBox();
-            this.correlatedRadioButton = new System.Windows.Forms.RadioButton();
-            this.noCorrelatedRadioButton = new System.Windows.Forms.RadioButton();
-            this.countOfPlacesLabel = new System.Windows.Forms.Label();
-            this.countOfPlacesTextBox = new System.Windows.Forms.TextBox();
-            this.subqueryButton = new System.Windows.Forms.Button();
             this.subqueryDataGridView = new System.Windows.Forms.DataGridView();
+            this.subqueryGroupBox = new System.Windows.Forms.GroupBox();
+            this.subqueryButton = new System.Windows.Forms.Button();
+            this.countOfPlacesTextBox = new System.Windows.Forms.TextBox();
+            this.countOfPlacesLabel = new System.Windows.Forms.Label();
+            this.noCorrelatedRadioButton = new System.Windows.Forms.RadioButton();
+            this.correlatedRadioButton = new System.Windows.Forms.RadioButton();
+            this.dmlTabPage = new System.Windows.Forms.TabPage();
+            this.dmlGroupBox = new System.Windows.Forms.GroupBox();
+            this.insertRadioButton = new System.Windows.Forms.RadioButton();
+            this.updateRadioButton = new System.Windows.Forms.RadioButton();
+            this.deleteRadioButton = new System.Windows.Forms.RadioButton();
+            this.passportDataLabel = new System.Windows.Forms.Label();
+            this.passportDataTextBox = new System.Windows.Forms.TextBox();
+            this.clientPanel = new System.Windows.Forms.Panel();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.surnameLabel = new System.Windows.Forms.Label();
+            this.patronymicLabel = new System.Windows.Forms.Label();
+            this.hotelRoomLabel = new System.Windows.Forms.Label();
+            this.arrivalDateLabel = new System.Windows.Forms.Label();
+            this.cityFromWhichCameLabel = new System.Windows.Forms.Label();
+            this.departureDate = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.surnameTextBox = new System.Windows.Forms.TextBox();
+            this.patronymicTextBox = new System.Windows.Forms.TextBox();
+            this.hotelRoomTextBox = new System.Windows.Forms.TextBox();
+            this.cityFromWhichCameTextBox = new System.Windows.Forms.TextBox();
+            this.arrivalDateTextBox = new System.Windows.Forms.TextBox();
+            this.departureDateTextBox = new System.Windows.Forms.TextBox();
+            this.executeDMLButton = new System.Windows.Forms.Button();
+            this.clientDataGridView = new System.Windows.Forms.DataGridView();
+            this.selectClientButton = new System.Windows.Forms.Button();
             this.sqlTabControl.SuspendLayout();
             this.primerTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectDataGridView)).BeginInit();
@@ -68,8 +93,12 @@
             this.fSelectGroupBox.SuspendLayout();
             this.detGroupBox.SuspendLayout();
             this.subqueryTabPage.SuspendLayout();
-            this.subqueryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subqueryDataGridView)).BeginInit();
+            this.subqueryGroupBox.SuspendLayout();
+            this.dmlTabPage.SuspendLayout();
+            this.dmlGroupBox.SuspendLayout();
+            this.clientPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // sqlTabControl
@@ -77,6 +106,7 @@
             this.sqlTabControl.Controls.Add(this.primerTabPage);
             this.sqlTabControl.Controls.Add(this.selectTabPage);
             this.sqlTabControl.Controls.Add(this.subqueryTabPage);
+            this.sqlTabControl.Controls.Add(this.dmlTabPage);
             this.sqlTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sqlTabControl.Location = new System.Drawing.Point(0, 0);
             this.sqlTabControl.Name = "sqlTabControl";
@@ -200,7 +230,7 @@
             this.fSelectGroupBox.Controls.Add(this.fSelectButton);
             this.fSelectGroupBox.Controls.Add(this.detGroupBox);
             this.fSelectGroupBox.Controls.Add(this.ascArrivalDateCheckBox);
-            this.fSelectGroupBox.Controls.Add(this.arrivalDateTextBox);
+            this.fSelectGroupBox.Controls.Add(this.moreArrivalDateTextBox);
             this.fSelectGroupBox.Controls.Add(this.arrivalDateCheckBox);
             this.fSelectGroupBox.Controls.Add(this.clientSurnameTextBox);
             this.fSelectGroupBox.Controls.Add(this.clientSurnameLabel);
@@ -280,12 +310,12 @@
             this.ascArrivalDateCheckBox.Text = "Включить сортировку по возрастанию даты приезда";
             this.ascArrivalDateCheckBox.UseVisualStyleBackColor = true;
             // 
-            // arrivalDateTextBox
+            // moreArrivalDateTextBox
             // 
-            this.arrivalDateTextBox.Location = new System.Drawing.Point(193, 69);
-            this.arrivalDateTextBox.Name = "arrivalDateTextBox";
-            this.arrivalDateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.arrivalDateTextBox.TabIndex = 3;
+            this.moreArrivalDateTextBox.Location = new System.Drawing.Point(193, 69);
+            this.moreArrivalDateTextBox.Name = "moreArrivalDateTextBox";
+            this.moreArrivalDateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.moreArrivalDateTextBox.TabIndex = 3;
             // 
             // arrivalDateCheckBox
             // 
@@ -324,6 +354,15 @@
             this.subqueryTabPage.Text = "Примеры подзопросов";
             this.subqueryTabPage.UseVisualStyleBackColor = true;
             // 
+            // subqueryDataGridView
+            // 
+            this.subqueryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.subqueryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.subqueryDataGridView.Location = new System.Drawing.Point(0, 193);
+            this.subqueryDataGridView.Name = "subqueryDataGridView";
+            this.subqueryDataGridView.Size = new System.Drawing.Size(749, 189);
+            this.subqueryDataGridView.TabIndex = 1;
+            // 
             // subqueryGroupBox
             // 
             this.subqueryGroupBox.Controls.Add(this.subqueryButton);
@@ -340,16 +379,30 @@
             this.subqueryGroupBox.TabStop = false;
             this.subqueryGroupBox.Text = "Подзапросы по данным";
             // 
-            // correlatedRadioButton
+            // subqueryButton
             // 
-            this.correlatedRadioButton.AutoSize = true;
-            this.correlatedRadioButton.Location = new System.Drawing.Point(27, 43);
-            this.correlatedRadioButton.Name = "correlatedRadioButton";
-            this.correlatedRadioButton.Size = new System.Drawing.Size(118, 17);
-            this.correlatedRadioButton.TabIndex = 0;
-            this.correlatedRadioButton.TabStop = true;
-            this.correlatedRadioButton.Text = "Коррелированный";
-            this.correlatedRadioButton.UseVisualStyleBackColor = true;
+            this.subqueryButton.Location = new System.Drawing.Point(177, 153);
+            this.subqueryButton.Name = "subqueryButton";
+            this.subqueryButton.Size = new System.Drawing.Size(154, 23);
+            this.subqueryButton.TabIndex = 4;
+            this.subqueryButton.Text = "Выполнить подзапрос";
+            this.subqueryButton.UseVisualStyleBackColor = true;
+            // 
+            // countOfPlacesTextBox
+            // 
+            this.countOfPlacesTextBox.Location = new System.Drawing.Point(193, 101);
+            this.countOfPlacesTextBox.Name = "countOfPlacesTextBox";
+            this.countOfPlacesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.countOfPlacesTextBox.TabIndex = 3;
+            // 
+            // countOfPlacesLabel
+            // 
+            this.countOfPlacesLabel.AutoSize = true;
+            this.countOfPlacesLabel.Location = new System.Drawing.Point(24, 104);
+            this.countOfPlacesLabel.Name = "countOfPlacesLabel";
+            this.countOfPlacesLabel.Size = new System.Drawing.Size(149, 13);
+            this.countOfPlacesLabel.TabIndex = 2;
+            this.countOfPlacesLabel.Text = "Количество мест в номерах";
             // 
             // noCorrelatedRadioButton
             // 
@@ -362,39 +415,254 @@
             this.noCorrelatedRadioButton.Text = "Некоррелированный";
             this.noCorrelatedRadioButton.UseVisualStyleBackColor = true;
             // 
-            // countOfPlacesLabel
+            // correlatedRadioButton
             // 
-            this.countOfPlacesLabel.AutoSize = true;
-            this.countOfPlacesLabel.Location = new System.Drawing.Point(24, 104);
-            this.countOfPlacesLabel.Name = "countOfPlacesLabel";
-            this.countOfPlacesLabel.Size = new System.Drawing.Size(149, 13);
-            this.countOfPlacesLabel.TabIndex = 2;
-            this.countOfPlacesLabel.Text = "Количество мест в номерах";
+            this.correlatedRadioButton.AutoSize = true;
+            this.correlatedRadioButton.Location = new System.Drawing.Point(27, 43);
+            this.correlatedRadioButton.Name = "correlatedRadioButton";
+            this.correlatedRadioButton.Size = new System.Drawing.Size(118, 17);
+            this.correlatedRadioButton.TabIndex = 0;
+            this.correlatedRadioButton.TabStop = true;
+            this.correlatedRadioButton.Text = "Коррелированный";
+            this.correlatedRadioButton.UseVisualStyleBackColor = true;
             // 
-            // countOfPlacesTextBox
+            // dmlTabPage
             // 
-            this.countOfPlacesTextBox.Location = new System.Drawing.Point(193, 101);
-            this.countOfPlacesTextBox.Name = "countOfPlacesTextBox";
-            this.countOfPlacesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.countOfPlacesTextBox.TabIndex = 3;
+            this.dmlTabPage.Controls.Add(this.clientDataGridView);
+            this.dmlTabPage.Controls.Add(this.clientPanel);
+            this.dmlTabPage.Controls.Add(this.dmlGroupBox);
+            this.dmlTabPage.Location = new System.Drawing.Point(4, 22);
+            this.dmlTabPage.Name = "dmlTabPage";
+            this.dmlTabPage.Size = new System.Drawing.Size(749, 382);
+            this.dmlTabPage.TabIndex = 3;
+            this.dmlTabPage.Text = "Запросы изменения данных";
+            this.dmlTabPage.UseVisualStyleBackColor = true;
             // 
-            // subqueryButton
+            // dmlGroupBox
             // 
-            this.subqueryButton.Location = new System.Drawing.Point(177, 153);
-            this.subqueryButton.Name = "subqueryButton";
-            this.subqueryButton.Size = new System.Drawing.Size(154, 23);
-            this.subqueryButton.TabIndex = 4;
-            this.subqueryButton.Text = "Выполнить подзапрос";
-            this.subqueryButton.UseVisualStyleBackColor = true;
+            this.dmlGroupBox.Controls.Add(this.executeDMLButton);
+            this.dmlGroupBox.Controls.Add(this.passportDataTextBox);
+            this.dmlGroupBox.Controls.Add(this.passportDataLabel);
+            this.dmlGroupBox.Controls.Add(this.deleteRadioButton);
+            this.dmlGroupBox.Controls.Add(this.updateRadioButton);
+            this.dmlGroupBox.Controls.Add(this.insertRadioButton);
+            this.dmlGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dmlGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.dmlGroupBox.Name = "dmlGroupBox";
+            this.dmlGroupBox.Size = new System.Drawing.Size(749, 100);
+            this.dmlGroupBox.TabIndex = 0;
+            this.dmlGroupBox.TabStop = false;
+            this.dmlGroupBox.Text = "Операторы";
             // 
-            // subqueryDataGridView
+            // insertRadioButton
             // 
-            this.subqueryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.subqueryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.subqueryDataGridView.Location = new System.Drawing.Point(0, 193);
-            this.subqueryDataGridView.Name = "subqueryDataGridView";
-            this.subqueryDataGridView.Size = new System.Drawing.Size(749, 189);
-            this.subqueryDataGridView.TabIndex = 1;
+            this.insertRadioButton.AutoSize = true;
+            this.insertRadioButton.Location = new System.Drawing.Point(9, 20);
+            this.insertRadioButton.Name = "insertRadioButton";
+            this.insertRadioButton.Size = new System.Drawing.Size(119, 17);
+            this.insertRadioButton.TabIndex = 0;
+            this.insertRadioButton.TabStop = true;
+            this.insertRadioButton.Text = "Дабавить клиента";
+            this.insertRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // updateRadioButton
+            // 
+            this.updateRadioButton.AutoSize = true;
+            this.updateRadioButton.Location = new System.Drawing.Point(290, 19);
+            this.updateRadioButton.Name = "updateRadioButton";
+            this.updateRadioButton.Size = new System.Drawing.Size(120, 17);
+            this.updateRadioButton.TabIndex = 1;
+            this.updateRadioButton.TabStop = true;
+            this.updateRadioButton.Text = "Изменить клиента";
+            this.updateRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // deleteRadioButton
+            // 
+            this.deleteRadioButton.AutoSize = true;
+            this.deleteRadioButton.Location = new System.Drawing.Point(551, 20);
+            this.deleteRadioButton.Name = "deleteRadioButton";
+            this.deleteRadioButton.Size = new System.Drawing.Size(112, 17);
+            this.deleteRadioButton.TabIndex = 2;
+            this.deleteRadioButton.TabStop = true;
+            this.deleteRadioButton.Text = "Удалить клиента";
+            this.deleteRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // passportDataLabel
+            // 
+            this.passportDataLabel.AutoSize = true;
+            this.passportDataLabel.Location = new System.Drawing.Point(7, 57);
+            this.passportDataLabel.Name = "passportDataLabel";
+            this.passportDataLabel.Size = new System.Drawing.Size(155, 13);
+            this.passportDataLabel.TabIndex = 3;
+            this.passportDataLabel.Text = "Паспортные данные клиента";
+            // 
+            // passportDataTextBox
+            // 
+            this.passportDataTextBox.Location = new System.Drawing.Point(168, 54);
+            this.passportDataTextBox.Name = "passportDataTextBox";
+            this.passportDataTextBox.Size = new System.Drawing.Size(100, 20);
+            this.passportDataTextBox.TabIndex = 4;
+            // 
+            // clientPanel
+            // 
+            this.clientPanel.Controls.Add(this.selectClientButton);
+            this.clientPanel.Controls.Add(this.departureDateTextBox);
+            this.clientPanel.Controls.Add(this.arrivalDateTextBox);
+            this.clientPanel.Controls.Add(this.cityFromWhichCameTextBox);
+            this.clientPanel.Controls.Add(this.hotelRoomTextBox);
+            this.clientPanel.Controls.Add(this.patronymicTextBox);
+            this.clientPanel.Controls.Add(this.surnameTextBox);
+            this.clientPanel.Controls.Add(this.nameTextBox);
+            this.clientPanel.Controls.Add(this.departureDate);
+            this.clientPanel.Controls.Add(this.cityFromWhichCameLabel);
+            this.clientPanel.Controls.Add(this.arrivalDateLabel);
+            this.clientPanel.Controls.Add(this.hotelRoomLabel);
+            this.clientPanel.Controls.Add(this.patronymicLabel);
+            this.clientPanel.Controls.Add(this.surnameLabel);
+            this.clientPanel.Controls.Add(this.nameLabel);
+            this.clientPanel.Location = new System.Drawing.Point(3, 99);
+            this.clientPanel.Name = "clientPanel";
+            this.clientPanel.Size = new System.Drawing.Size(743, 142);
+            this.clientPanel.TabIndex = 1;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(16, 8);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Text = "Name";
+            // 
+            // surnameLabel
+            // 
+            this.surnameLabel.AutoSize = true;
+            this.surnameLabel.Location = new System.Drawing.Point(16, 42);
+            this.surnameLabel.Name = "surnameLabel";
+            this.surnameLabel.Size = new System.Drawing.Size(49, 13);
+            this.surnameLabel.TabIndex = 1;
+            this.surnameLabel.Text = "Surname";
+            // 
+            // patronymicLabel
+            // 
+            this.patronymicLabel.AutoSize = true;
+            this.patronymicLabel.Location = new System.Drawing.Point(16, 81);
+            this.patronymicLabel.Name = "patronymicLabel";
+            this.patronymicLabel.Size = new System.Drawing.Size(59, 13);
+            this.patronymicLabel.TabIndex = 2;
+            this.patronymicLabel.Text = "Patronymic";
+            // 
+            // hotelRoomLabel
+            // 
+            this.hotelRoomLabel.AutoSize = true;
+            this.hotelRoomLabel.Location = new System.Drawing.Point(16, 113);
+            this.hotelRoomLabel.Name = "hotelRoomLabel";
+            this.hotelRoomLabel.Size = new System.Drawing.Size(60, 13);
+            this.hotelRoomLabel.TabIndex = 3;
+            this.hotelRoomLabel.Text = "HotelRoom";
+            // 
+            // arrivalDateLabel
+            // 
+            this.arrivalDateLabel.AutoSize = true;
+            this.arrivalDateLabel.Location = new System.Drawing.Point(245, 42);
+            this.arrivalDateLabel.Name = "arrivalDateLabel";
+            this.arrivalDateLabel.Size = new System.Drawing.Size(59, 13);
+            this.arrivalDateLabel.TabIndex = 4;
+            this.arrivalDateLabel.Text = "ArrivalDate";
+            // 
+            // cityFromWhichCameLabel
+            // 
+            this.cityFromWhichCameLabel.AutoSize = true;
+            this.cityFromWhichCameLabel.Location = new System.Drawing.Point(245, 8);
+            this.cityFromWhichCameLabel.Name = "cityFromWhichCameLabel";
+            this.cityFromWhichCameLabel.Size = new System.Drawing.Size(105, 13);
+            this.cityFromWhichCameLabel.TabIndex = 5;
+            this.cityFromWhichCameLabel.Text = "CityFromWhichCame";
+            // 
+            // departureDate
+            // 
+            this.departureDate.AutoSize = true;
+            this.departureDate.Location = new System.Drawing.Point(245, 81);
+            this.departureDate.Name = "departureDate";
+            this.departureDate.Size = new System.Drawing.Size(77, 13);
+            this.departureDate.TabIndex = 7;
+            this.departureDate.Text = "DepartureDate";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(79, 8);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.nameTextBox.TabIndex = 8;
+            // 
+            // surnameTextBox
+            // 
+            this.surnameTextBox.Location = new System.Drawing.Point(79, 39);
+            this.surnameTextBox.Name = "surnameTextBox";
+            this.surnameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.surnameTextBox.TabIndex = 9;
+            // 
+            // patronymicTextBox
+            // 
+            this.patronymicTextBox.Location = new System.Drawing.Point(81, 78);
+            this.patronymicTextBox.Name = "patronymicTextBox";
+            this.patronymicTextBox.Size = new System.Drawing.Size(100, 20);
+            this.patronymicTextBox.TabIndex = 10;
+            // 
+            // hotelRoomTextBox
+            // 
+            this.hotelRoomTextBox.Location = new System.Drawing.Point(82, 110);
+            this.hotelRoomTextBox.Name = "hotelRoomTextBox";
+            this.hotelRoomTextBox.Size = new System.Drawing.Size(100, 20);
+            this.hotelRoomTextBox.TabIndex = 11;
+            // 
+            // cityFromWhichCameTextBox
+            // 
+            this.cityFromWhichCameTextBox.Location = new System.Drawing.Point(356, 8);
+            this.cityFromWhichCameTextBox.Name = "cityFromWhichCameTextBox";
+            this.cityFromWhichCameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.cityFromWhichCameTextBox.TabIndex = 12;
+            // 
+            // arrivalDateTextBox
+            // 
+            this.arrivalDateTextBox.Location = new System.Drawing.Point(356, 39);
+            this.arrivalDateTextBox.Name = "arrivalDateTextBox";
+            this.arrivalDateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.arrivalDateTextBox.TabIndex = 13;
+            // 
+            // departureDateTextBox
+            // 
+            this.departureDateTextBox.Location = new System.Drawing.Point(356, 78);
+            this.departureDateTextBox.Name = "departureDateTextBox";
+            this.departureDateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.departureDateTextBox.TabIndex = 14;
+            // 
+            // executeDMLButton
+            // 
+            this.executeDMLButton.Location = new System.Drawing.Point(290, 71);
+            this.executeDMLButton.Name = "executeDMLButton";
+            this.executeDMLButton.Size = new System.Drawing.Size(152, 23);
+            this.executeDMLButton.TabIndex = 5;
+            this.executeDMLButton.Text = "Выполнить запрос";
+            this.executeDMLButton.UseVisualStyleBackColor = true;
+            // 
+            // clientDataGridView
+            // 
+            this.clientDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clientDataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.clientDataGridView.Location = new System.Drawing.Point(0, 247);
+            this.clientDataGridView.Name = "clientDataGridView";
+            this.clientDataGridView.Size = new System.Drawing.Size(749, 135);
+            this.clientDataGridView.TabIndex = 2;
+            // 
+            // selectClientButton
+            // 
+            this.selectClientButton.Location = new System.Drawing.Point(275, 119);
+            this.selectClientButton.Name = "selectClientButton";
+            this.selectClientButton.Size = new System.Drawing.Size(170, 23);
+            this.selectClientButton.TabIndex = 15;
+            this.selectClientButton.Text = "Показать список клиентов";
+            this.selectClientButton.UseVisualStyleBackColor = true;
             // 
             // FormSQL
             // 
@@ -416,9 +684,15 @@
             this.detGroupBox.ResumeLayout(false);
             this.detGroupBox.PerformLayout();
             this.subqueryTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.subqueryDataGridView)).EndInit();
             this.subqueryGroupBox.ResumeLayout(false);
             this.subqueryGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subqueryDataGridView)).EndInit();
+            this.dmlTabPage.ResumeLayout(false);
+            this.dmlGroupBox.ResumeLayout(false);
+            this.dmlGroupBox.PerformLayout();
+            this.clientPanel.ResumeLayout(false);
+            this.clientPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -438,7 +712,7 @@
         private System.Windows.Forms.GroupBox fSelectGroupBox;
         private System.Windows.Forms.TextBox clientSurnameTextBox;
         private System.Windows.Forms.Label clientSurnameLabel;
-        private System.Windows.Forms.TextBox arrivalDateTextBox;
+        private System.Windows.Forms.TextBox moreArrivalDateTextBox;
         private System.Windows.Forms.CheckBox arrivalDateCheckBox;
         private System.Windows.Forms.DataGridView fSelectDataGridView;
         private System.Windows.Forms.CheckBox ascArrivalDateCheckBox;
@@ -455,5 +729,30 @@
         private System.Windows.Forms.TextBox countOfPlacesTextBox;
         private System.Windows.Forms.Label countOfPlacesLabel;
         private System.Windows.Forms.DataGridView subqueryDataGridView;
+        private System.Windows.Forms.TabPage dmlTabPage;
+        private System.Windows.Forms.GroupBox dmlGroupBox;
+        private System.Windows.Forms.RadioButton deleteRadioButton;
+        private System.Windows.Forms.RadioButton updateRadioButton;
+        private System.Windows.Forms.RadioButton insertRadioButton;
+        private System.Windows.Forms.Panel clientPanel;
+        private System.Windows.Forms.TextBox passportDataTextBox;
+        private System.Windows.Forms.Label passportDataLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label departureDate;
+        private System.Windows.Forms.Label cityFromWhichCameLabel;
+        private System.Windows.Forms.Label arrivalDateLabel;
+        private System.Windows.Forms.Label hotelRoomLabel;
+        private System.Windows.Forms.Label patronymicLabel;
+        private System.Windows.Forms.Label surnameLabel;
+        private System.Windows.Forms.TextBox departureDateTextBox;
+        private System.Windows.Forms.TextBox arrivalDateTextBox;
+        private System.Windows.Forms.TextBox cityFromWhichCameTextBox;
+        private System.Windows.Forms.TextBox hotelRoomTextBox;
+        private System.Windows.Forms.TextBox patronymicTextBox;
+        private System.Windows.Forms.TextBox surnameTextBox;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.DataGridView clientDataGridView;
+        private System.Windows.Forms.Button selectClientButton;
+        private System.Windows.Forms.Button executeDMLButton;
     }
 }

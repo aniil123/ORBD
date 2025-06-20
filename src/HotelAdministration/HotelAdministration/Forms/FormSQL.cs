@@ -34,6 +34,8 @@ namespace HotelAdministration.Forms
             reportRadioButton.CheckedChanged += ReportRadioButton_CheckedChanged;
             fSelectButton.Click += FSelectButton_Click;
             subqueryButton.Click += SubqueryButton_Click;
+            selectClientButton.Click += SelectClientButton_Click;
+            executeDMLButton.Click += ExecuteDMLButton;
         }
 
         private void HotelRoomRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -92,7 +94,7 @@ namespace HotelAdministration.Forms
                 MessageBox.Show("Обязательно укажите фамилию необходимого клиента.\nДопустим ввод первых символов.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (arrivalDateCheckBox.Checked && String.IsNullOrEmpty(arrivalDateTextBox.Text))
+            if (arrivalDateCheckBox.Checked && String.IsNullOrEmpty(moreArrivalDateTextBox.Text))
             {
                 MessageBox.Show("Не указана дата в условии", "Внимание",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -135,7 +137,7 @@ namespace HotelAdministration.Forms
             {
                 try
                 {
-                    command.Parameters.AddWithValue("@arrivalDate", arrivalDateTextBox.Text);
+                    command.Parameters.AddWithValue("@arrivalDate", moreArrivalDateTextBox.Text);
                 }
                 catch
                 {
@@ -200,6 +202,23 @@ namespace HotelAdministration.Forms
             if (table.Rows.Count == 0) MessageBox.Show("Нет значений!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void SelectClientButton_Click(object sender, EventArgs e)
+        {
+            clientDataGridView.DataSource = FillDataGridView("SELECT * FROM Client");
+        }
+
+        private void ExecuteDMLButton(object sender, EventArgs e)
+        {
+            if (insertRadioButton.Checked)
+                InsertClient();
+            else if (updateRadioButton.Checked)
+                UpdateClient();
+            else if (deleteRadioButton.Checked)
+                DeleteClient();
+            else
+                MessageBox.Show("Необходимо выбрать операцию", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private DataTable FillDataGridView(string sqlSelect)
         {
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
@@ -210,6 +229,177 @@ namespace HotelAdministration.Forms
             DataTable table = new DataTable();
             adapter.Fill(table);
             return table;
+        }
+
+        private void InsertClient()
+        {
+            if (String.IsNullOrEmpty(passportDataTextBox.Text) ||
+                String.IsNullOrEmpty(nameTextBox.Text) ||
+                String.IsNullOrEmpty(surnameTextBox.Text) ||
+                String.IsNullOrEmpty(patronymicTextBox.Text) ||
+                String.IsNullOrEmpty(hotelRoomTextBox.Text) ||
+                String.IsNullOrEmpty(cityFromWhichCameTextBox.Text) ||
+                String.IsNullOrEmpty(arrivalDateTextBox.Text) ||
+                String.IsNullOrEmpty(departureDateTextBox.Text))
+            {
+                MessageBox.Show("Обязательно введите все необходимые данные", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                return;
+            }
+            string sqlInsert = @"INSERT INTO Client (PassportData, Name, Surname, Patronymic, HotelRoom, CityFromWhichCame, ArrivalDate, DepartureDate)
+                                 VALUES (@passportData, @name, @surname, @patronymic, @hotelRoom, @cityFromWhichCame, @arrivalDate, @departureDate)";
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = sqlInsert;
+            command.Parameters.AddWithValue("@passportData", passportDataTextBox.Text);
+            command.Parameters.AddWithValue("@name", nameTextBox.Text);
+            command.Parameters.AddWithValue("@surname", surnameTextBox.Text);
+            command.Parameters.AddWithValue("@patronymic", patronymicTextBox.Text);
+            command.Parameters.AddWithValue("@hotelRoom", hotelRoomTextBox.Text);
+            command.Parameters.AddWithValue("@cityFromWhichCame", cityFromWhichCameTextBox.Text);
+            command.Parameters.AddWithValue("@arrivalDate", arrivalDateTextBox.Text);
+            command.Parameters.AddWithValue("@departureDate", departureDateTextBox.Text);
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка выполнения запроса\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            connection.Close();
+            SelectClientButton_Click(this, EventArgs.Empty);
+        }
+
+        private void UpdateClient()
+        {
+            if (String.IsNullOrEmpty(nameTextBox.Text) ||
+                String.IsNullOrEmpty(surnameTextBox.Text) ||
+                String.IsNullOrEmpty(patronymicTextBox.Text) ||
+                String.IsNullOrEmpty(hotelRoomTextBox.Text) ||
+                String.IsNullOrEmpty(cityFromWhichCameTextBox.Text) ||
+                String.IsNullOrEmpty(arrivalDateTextBox.Text) ||
+                String.IsNullOrEmpty(departureDateTextBox.Text))
+            {
+                MessageBox.Show("Обязательно введите все необходимые данные", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string sqlUpdate = @"UPDATE Client SET {0} WHERE PassportData = @passportData";
+
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            string sqlValues = "";
+            if (!String.IsNullOrEmpty(nameTextBox.Text))
+                sqlValues += "Name=@name,";
+            if (!String.IsNullOrEmpty(surnameTextBox.Text))
+                sqlValues += "Surname=@surname,";
+            if (!String.IsNullOrEmpty(patronymicTextBox.Text))
+                sqlValues += "Patronymic=@patronymic,";
+            if (!String.IsNullOrEmpty(hotelRoomTextBox.Text))
+                sqlValues += "HotelRoom=@hotelRoom,";
+            if (!String.IsNullOrEmpty(cityFromWhichCameTextBox.Text))
+                sqlValues += "CityFromWhichCame=@cityFromWhichCame,";
+            if (!String.IsNullOrEmpty(arrivalDateTextBox.Text))
+                sqlValues += "ArrivalDate=@arrivalDate,";
+            if (!String.IsNullOrEmpty(departureDateTextBox.Text))
+                sqlValues += "DepartureDate=@departureDate,";
+            sqlValues = sqlValues.Substring(0, sqlValues.Length - 1);
+            command.CommandText = String.Format(sqlUpdate, sqlValues);
+            if (!String.IsNullOrEmpty(passportDataTextBox.Text))
+                command.Parameters.AddWithValue("@passportData", passportDataTextBox.Text);
+            if (!String.IsNullOrEmpty(nameTextBox.Text))
+                command.Parameters.AddWithValue("@name", nameTextBox.Text);
+            if (!String.IsNullOrEmpty(surnameTextBox.Text))
+                command.Parameters.AddWithValue("@surname", surnameTextBox.Text);
+            if (!String.IsNullOrEmpty(patronymicTextBox.Text))
+                command.Parameters.AddWithValue("@patronymic", patronymicTextBox.Text);
+            if (!String.IsNullOrEmpty(hotelRoomTextBox.Text))
+                command.Parameters.AddWithValue("@hotelRoom", hotelRoomTextBox.Text);
+            if (!String.IsNullOrEmpty(cityFromWhichCameTextBox.Text))
+                command.Parameters.AddWithValue("@cityFromWhichCame", cityFromWhichCameTextBox.Text);
+            if (!String.IsNullOrEmpty(arrivalDateTextBox.Text))
+                command.Parameters.AddWithValue("@arrivalDate", arrivalDateTextBox.Text);
+            if (!String.IsNullOrEmpty(departureDateTextBox.Text))
+                command.Parameters.AddWithValue("@departureDate", departureDateTextBox.Text);
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка выполнения запроса\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            connection.Close();
+            SelectClientButton_Click(this, EventArgs.Empty);
+        }
+
+        private void DeleteClient()
+        {
+
+            if (String.IsNullOrEmpty(passportDataTextBox.Text))
+            {
+                MessageBox.Show("Обязательно укажите паспортные данные", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                return;
+            }
+            string sqlDelete = @"DELETE FROM Client WHERE PassportData = @passportData";
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = sqlDelete;
+            command.Parameters.AddWithValue("@passportData", passportDataTextBox.Text);
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка выполнения запроса\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            connection.Close();
+            SelectClientButton_Click(this, EventArgs.Empty);
+        }
+
+        private void DataVerification()
+        {
+            if (String.IsNullOrEmpty(passportDataTextBox.Text))
+            {
+                throw new Exception("Необходимо заполнить паспортные данные");
+            }
+            else
+            {
+                string passportData = passportDataTextBox.Text;
+                string gradualPassportData = "";
+                if (passportData[4] != ' ' || passportData.Length != 11)
+                    throw new Exception("Ошибка в паспортных данных");
+                for (int i = 0; i < 4; i++)
+                {
+                    gradualPassportData += passportData[i];
+                }
+                Convert.ToInt32(gradualPassportData);
+                gradualPassportData = "";
+                for (int i = 5; i < 11; i++)
+                {
+                    gradualPassportData += passportData[i];
+                }
+                Convert.ToInt32(gradualPassportData);
+            }
+            if (String.IsNullOrEmpty(nameTextBox.Text))
+                throw new Exception("Необходимо заполнить имя");
+            if (String.IsNullOrEmpty(surnameTextBox.Text))
+                throw new Exception("Необходимо заполнить фамилию");
+            if (String.IsNullOrEmpty(patronymicTextBox.Text))
+                throw new Exception("Необходимо заполнить отчество");
+            if (String.IsNullOrEmpty(hotelRoomTextBox.Text))
+                throw new Exception("Необходимо заполнить гостиничный номер");
+            else
+                Convert.ToInt16(hotelRoomTextBox.Text);
+            if (String.IsNullOrEmpty(cityFromWhichCameTextBox.Text))
+                throw new Exception("Необходимо заполнить город");
+            if (String.IsNullOrEmpty(arrivalDateTextBox.Text))
+                throw new Exception("Необходимо заполнить дату приезда");
+            if (String.IsNullOrEmpty(departureDateTextBox.Text))
+                throw new Exception("Необходимо заполнить дату отъезда");
         }
     }
 }
