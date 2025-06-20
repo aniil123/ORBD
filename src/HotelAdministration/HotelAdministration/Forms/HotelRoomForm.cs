@@ -128,9 +128,10 @@ namespace HotelAdministration.Forms
             currentRoomNumber = roomNumber;
             bool dialogResult = ShowDialog() == DialogResult.OK;
             toolStripButtonOK.Visible = false;
+            int selectedRoomNumber = Convert.ToInt16(((DataRowView)hotelRoomBindingSource.Current)["RoomNumber"]);
             hotelRoomBindingSource.Position = 0;
             if (dialogResult)
-                return Convert.ToInt16(((DataRowView)hotelRoomBindingSource.Current)["RoomNumber"]);
+                return selectedRoomNumber;
             else
                 return -1;
         }

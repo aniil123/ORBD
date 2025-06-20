@@ -167,7 +167,7 @@ namespace HotelAdministration.Forms
                               HotelRoom.PhoneNumber, 
                               HotelRoom.Cost, 
                               HotelRoom.CountOfPlaces, 
-                              (SELECT BusyDays FROM HotelRoom_Report WHERE Quarter = 1 AND RoomNumber = HotelRoom.RoomNumber) AS BusyDays
+                              COALESCE((SELECT BusyDays FROM HotelRoom_Report WHERE Quarter = 1 AND RoomNumber = HotelRoom.RoomNumber), 0) AS BusyDays
                               FROM HotelRoom
                               WHERE CountOfPlaces = @countOfPlaces";
             }
@@ -233,16 +233,13 @@ namespace HotelAdministration.Forms
 
         private void InsertClient()
         {
-            if (String.IsNullOrEmpty(passportDataTextBox.Text) ||
-                String.IsNullOrEmpty(nameTextBox.Text) ||
-                String.IsNullOrEmpty(surnameTextBox.Text) ||
-                String.IsNullOrEmpty(patronymicTextBox.Text) ||
-                String.IsNullOrEmpty(hotelRoomTextBox.Text) ||
-                String.IsNullOrEmpty(cityFromWhichCameTextBox.Text) ||
-                String.IsNullOrEmpty(arrivalDateTextBox.Text) ||
-                String.IsNullOrEmpty(departureDateTextBox.Text))
+            try
             {
-                MessageBox.Show("Обязательно введите все необходимые данные", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                DataVerification();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string sqlInsert = @"INSERT INTO Client (PassportData, Name, Surname, Patronymic, HotelRoom, CityFromWhichCame, ArrivalDate, DepartureDate)
@@ -273,19 +270,12 @@ namespace HotelAdministration.Forms
 
         private void UpdateClient()
         {
-            if (String.IsNullOrEmpty(nameTextBox.Text) ||
-                String.IsNullOrEmpty(surnameTextBox.Text) ||
-                String.IsNullOrEmpty(patronymicTextBox.Text) ||
-                String.IsNullOrEmpty(hotelRoomTextBox.Text) ||
-                String.IsNullOrEmpty(cityFromWhichCameTextBox.Text) ||
-                String.IsNullOrEmpty(arrivalDateTextBox.Text) ||
-                String.IsNullOrEmpty(departureDateTextBox.Text))
+            if (String.IsNullOrEmpty(passportDataTextBox.Text))
             {
-                MessageBox.Show("Обязательно введите все необходимые данные", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Необходимо указать паспортные данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string sqlUpdate = @"UPDATE Client SET {0} WHERE PassportData = @passportData";
-
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.HotelAdministrationConnectionString);
             connection.Open();
             SqlCommand command = connection.CreateCommand();
@@ -304,10 +294,14 @@ namespace HotelAdministration.Forms
                 sqlValues += "ArrivalDate=@arrivalDate,";
             if (!String.IsNullOrEmpty(departureDateTextBox.Text))
                 sqlValues += "DepartureDate=@departureDate,";
+            if (sqlValues.Length == 0)
+            {
+                MessageBox.Show("Необходимо ввести данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             sqlValues = sqlValues.Substring(0, sqlValues.Length - 1);
             command.CommandText = String.Format(sqlUpdate, sqlValues);
-            if (!String.IsNullOrEmpty(passportDataTextBox.Text))
-                command.Parameters.AddWithValue("@passportData", passportDataTextBox.Text);
+            command.Parameters.AddWithValue("@passportData", passportDataTextBox.Text);
             if (!String.IsNullOrEmpty(nameTextBox.Text))
                 command.Parameters.AddWithValue("@name", nameTextBox.Text);
             if (!String.IsNullOrEmpty(surnameTextBox.Text))

@@ -26,7 +26,7 @@ namespace HotelAdministration.Forms
         public ClientForm()
         {
             InitializeComponent();
-            clientDataGridView.CellClick += ClientDataGridView_Click;
+            clientDataGridView.CellClick += ClientDataGridView_CellClick;
             findToolStripButton.Click += findToolStripButton_Click;
             filterCheckBox.CheckedChanged += findCheckBox_CheckedChanged;
         }
@@ -97,7 +97,7 @@ namespace HotelAdministration.Forms
             }
         }
 
-        private void ClientDataGridView_Click(object sender, DataGridViewCellEventArgs e)
+        private void ClientDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn currentColumn = clientDataGridView.Columns[clientDataGridView.CurrentCell.ColumnIndex];
             if (currentColumn.DataPropertyName == "HotelRoom" && e.RowIndex != -1)
